@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use App\Base\BaseMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends BaseMigration
 {
     /**
      * Run the migrations.
@@ -25,6 +25,7 @@ return new class extends Migration
             
             $table->rememberToken();
             $table->softDeletes();
+            $this->setDeletedAtColumns($table);
             $table->timestamps();
         });
     }
