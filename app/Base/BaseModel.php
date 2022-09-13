@@ -11,6 +11,15 @@ abstract class BaseModel extends Model
 
     /**
      * Protect fields from  mass assignment
+     * 
+     * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * The number of models to return for pagination.
+     *
+     * @var int
+     */
+    protected $perPage = 20;
 }
