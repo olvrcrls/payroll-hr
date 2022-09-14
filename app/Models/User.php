@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany};
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,4 +48,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /** 
+     * Fetch related roles to the user
+     * 
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'id', 'role_id');
+    }
+
+    /**
+     * Timesheets related to the user arranged from latest
+     * 
+     * @return HasMany
+     */
+    public function timesheets(): HasMany
+    {
+        return $this->hasMany(Timesheet::class)->orderBy('start', 'desc');
+    }
 }
