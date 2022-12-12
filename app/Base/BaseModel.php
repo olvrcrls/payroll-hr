@@ -11,8 +11,8 @@ abstract class BaseModel extends Model
 
     /**
      * Protect fields from  mass assignment
-     * 
-     * @var array
+     *
+     * @var array<string>
      */
     protected $guarded = ['id'];
 

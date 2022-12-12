@@ -9,20 +9,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     /** Constant Variables for Role definition. */
-    const SUPER_ADMIN = 'super_admin';
-    const ADMIN = 'admin';
-    const SYSTEM = 'system';
+    public const SUPER_ADMIN = 'super_admin';
+    public const ADMIN = 'admin';
+    public const SYSTEM = 'system';
 
-    const EMPLOYEE = 'employee';
-    const SUPERVISOR = 'employee-supervisor';
-    const DIRECTOR = 'director';
+    public const EMPLOYEE = 'employee';
+    public const SUPERVISOR = 'employee-supervisor';
+    public const DIRECTOR = 'director';
 
 
     /** Fetch related users to the role
-     * 
+     *
      * @return BelongsToMany
      */
     public function users(): BelongsToMany
