@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
 
         if ($user->doesntExist()) {
             return redirect(RouteServiceProvider::REGISTER)
-                ->with($request->all());
+                ->withInput();
         }
 
         event(new Registered($user));
