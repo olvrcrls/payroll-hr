@@ -69,6 +69,45 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Automatically set the first name attribute to lowercase
+     * and display the data capitalized.
+     * @return Attribute
+     */
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucwords($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    /**
+     * Automatically set the first name attribute to lowercase
+     * and display the data capitalized.
+     * @return Attribute
+     */
+    protected function lastName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucwords($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    /**
+     * Automatically set the first name attribute to lowercase
+     * and display the data capitalized.
+     * @return Attribute
+     */
+    protected function middleName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucwords($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    /**
      * Fetch related roles to the user
      *
      * @return BelongsToMany
