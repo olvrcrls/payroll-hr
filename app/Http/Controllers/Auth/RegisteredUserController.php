@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'email_verified_at' => $verifyEmail
         ]);
 
-        if ($user->exists()) {
+        if ($user->doesntExist()) {
             return redirect(RouteServiceProvider::REGISTER)
                 ->with($request->all());
         }
