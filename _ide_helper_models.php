@@ -14,12 +14,28 @@ namespace App\Models{
 /**
  * App\Models\Role
  *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $restored_by
+ * @property string|null $restored_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
  * @method static \Illuminate\Database\Query\Builder|Role onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereRestoredAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereRestoredBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Role withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Role withoutTrashed()
  */
@@ -30,11 +46,51 @@ namespace App\Models{
 /**
  * App\Models\Timesheet
  *
- * @property-read \App\Models\User|null $user
+ * @property int $id
+ * @property string $start
+ * @property string|null $end
+ * @property string|null $original_start
+ * @property string|null $original_end
+ * @property int $break_minutes
+ * @property string|null $annotation
+ * @property string $type
+ * @property string $status
+ * @property int $user_id
+ * @property int $approved_by
+ * @property string|null $approver_note
+ * @property string|null $approved_at
+ * @property string|null $finalized_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $restored_by
+ * @property string|null $restored_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet newQuery()
  * @method static \Illuminate\Database\Query\Builder|Timesheet onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereAnnotation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereApprovedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereApprovedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereApproverNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereBreakMinutes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereFinalizedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereOriginalEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereOriginalStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereRestoredAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereRestoredBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|Timesheet withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Timesheet withoutTrashed()
  */
@@ -45,6 +101,21 @@ namespace App\Models{
 /**
  * App\Models\User
  *
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string|null $middle_name
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $restored_by
+ * @property string|null $restored_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $full_name
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
@@ -58,6 +129,20 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMiddleName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRestoredAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRestoredBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  */

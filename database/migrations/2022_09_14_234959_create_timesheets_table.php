@@ -14,7 +14,7 @@ return new class () extends BaseMigration {
     {
         Schema::create('timesheets', function (Blueprint $table) {
             $table->id();
-            $table->datetime('start')->default('now');
+            $table->datetime('start')->useCurrent();
             $table->datetime('end')->nullable();
             $table->datetime('original_start')->nullable();
             $table->datetime('original_end')->nullable();

@@ -23,17 +23,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $guarded = ['id'];
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -50,6 +39,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'start' => 'datetime',
+        'end' => 'datetime',
+        'deleted_at' => 'datetime'
     ];
 
     /**
@@ -69,6 +61,17 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function timesheets(): HasMany
     {
-        return $this->hasMany(Timesheet::class)->orderBy('start', 'desc');
+        return $this->hasMany(Timesheet::class)->latest('start');
+    }
+
+    /**
+     * Display full name of the user conditional with middle name
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return $this->middle_name ?
+        $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name
+        : $this->first_name . ' ' . $this->last_name;
     }
 }
