@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 abstract class BaseModel extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes {
+        restore as public softDeleteRestore;
+    }
 
     /**
      * Protect fields from  mass assignment
@@ -45,5 +47,17 @@ abstract class BaseModel extends Model
         return Attribute::make(
             get: fn ($value) => Carbon::createFromTimestamp(strtotime($value))->timezone(config('app.timezone_display')),
         );
+    }
+
+    /**
+     * Override the restore function for SoftDeletes
+     * @return void
+     */
+    public function restore()
+    {
+        $this->softDeleteRestore();
+        $this->update([
+            'restored_at' => now()
+        ]);
     }
 }

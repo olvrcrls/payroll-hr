@@ -17,7 +17,9 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use SoftDeletes;
+    use SoftDeletes {
+        restore as public softDeleteRestore;
+    }
 
     /**
      * The attributes that are not mass assignable
@@ -40,10 +42,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'start' => 'datetime',
-        'end' => 'datetime',
-        'deleted_at' => 'datetime'
+        // 'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
+        'restored_at' => 'datetime',
     ];
 
     /**
@@ -136,5 +137,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->middle_name ?
         $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name
         : $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * Override the restore function for SoftDeletes
+     * @return void
+     */
+    public function restore()
+    {
+        $this->softDeleteRestore();
+        $this->update([
+            'restored_at' => now()
+        ]);
     }
 }
