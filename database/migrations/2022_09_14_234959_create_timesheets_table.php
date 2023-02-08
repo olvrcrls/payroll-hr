@@ -30,7 +30,7 @@ return new class () extends BaseMigration {
             $table->unsignedBigInteger('approved_by')->index();
             $table->text('approver_note')->nullable();
             $table->timestamp('approved_at')->nullable();
-            $table->foreign('approved_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('approved_by')->references('id')->on('users');
 
             $table->timestamp('finalized_at')->nullable();
 
