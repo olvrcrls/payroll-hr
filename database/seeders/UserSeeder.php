@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
             User::with('roles')->forceDelete();
         }
 
-        $admin = User::insert([
+        // Insert the admin
+        User::insert([
             [
                 'first_name' => 'Oliver', 'last_name' => 'Carlos',
                 'email' => 'dev.olivercarlos@gmail.com',
