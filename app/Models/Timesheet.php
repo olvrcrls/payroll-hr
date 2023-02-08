@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Base\BaseModel;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,4 +44,14 @@ class Timesheet extends BaseModel
     }
 
     // TODO: Determine if timesheet is an OT, has OT approved, Night Differential, approval
+
+    /**
+     * Filter all the timesheet where it is approved
+     * @param mixed $query
+     * @return Builder
+     */
+    public function scopeApproved($query): Builder
+    {
+        return $query->where('approved_at', '!=', null);
+    }
 }
