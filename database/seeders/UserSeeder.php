@@ -25,11 +25,12 @@ class UserSeeder extends Seeder
                 'email' => 'dev.olivercarlos@gmail.com',
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
                 'email_verified_at' => now(),
+                'created_at' => now()
             ]
         ]);
 
         User::insert(
-            User::factory()->count(1000)->make()->makeVisible('password')->toArray()
+            User::factory()->count(999)->make()->makeVisible('password')->toArray()
         );
 
         $this->command->info("Inserted: " . User::count() . " users in the DB");
