@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\Traits\HasTimezone;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,12 +17,22 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use SoftDeletes;
+    use SoftDeletes {
+        restore as public softDeleteRestore;
+    }
+    use HasTimezone;
 
     /**
      * The attributes that are not mass assignable
      */
     protected $guarded = ['id'];
+
+    /**
+     * All of the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -40,33 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'start' => 'datetime',
-        'end' => 'datetime',
-        'deleted_at' => 'datetime'
+        // 'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
+        'restored_at' => 'datetime',
     ];
-
-    /**
-     * Display the datetime format from UTC to specified timezone
-     * @return Attribute
-     */
-    protected function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Carbon::createFromTimestamp(strtotime($value))->timezone(config('app.timezone_display')),
-        );
-    }
-
-    /**
-     * Display the datetime format from UTC to specified timezone
-     * @return Attribute
-     */
-    protected function updatedAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Carbon::createFromTimestamp(strtotime($value))->timezone(config('app.timezone_display')),
-        );
-    }
 
     /**
      * Automatically set the first name attribute to lowercase
@@ -114,7 +101,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'role_user', 'id', 'role_id');
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 
     /**
@@ -136,5 +123,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->middle_name ?
         $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name
         : $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * Override the restore function for SoftDeletes
+     * @return void
+     */
+    public function restore()
+    {
+        $this->softDeleteRestore();
+        $this->update([
+            'restored_at' => now()
+        ]);
     }
 }
