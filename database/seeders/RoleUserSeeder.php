@@ -20,8 +20,8 @@ class RoleUserSeeder extends Seeder
         $adminRole = Role::query()->select('id')->whereName(Role::ADMIN)->first();
         $superAdminUser->roles()->syncWithoutDetaching([$superAdminRole->id, $adminRole->id]);
 
-        $roles = Role::query()->select('id')->get()->except([$superAdminRole->id, $adminRole->id]);
-        $users = User::query()->select('id')->get()->except($superAdminUser->id);
+        $roles = Role::query()->select('id')->whereKeyNot([$superAdminRole->id, $adminRole->id])->get();
+        $users = User::query()->select('id')->whereKeyNot($superAdminUser->id)->get();
         $users->each(function ($user) use ($roles) {
             $role = $roles->random();
             $user->roles()->sync([$role->id]);
