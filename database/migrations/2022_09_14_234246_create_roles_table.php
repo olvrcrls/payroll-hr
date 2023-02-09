@@ -4,8 +4,7 @@ use App\Base\BaseMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends BaseMigration
-{
+return new class () extends BaseMigration {
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ return new class extends BaseMigration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique()->index();
-            
+
             $table->softDeletes();
             $this->setDeletedAtColumns($table);
             $table->timestamps();

@@ -4,8 +4,7 @@ use App\Base\BaseMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends BaseMigration
-{
+return new class () extends BaseMigration {
     /**
      * Run the migrations.
      *
@@ -15,7 +14,7 @@ return new class extends BaseMigration
     {
         Schema::create('timesheets', function (Blueprint $table) {
             $table->id();
-            $table->datetime('start')->default('now');
+            $table->datetime('start')->useCurrent();
             $table->datetime('end')->nullable();
             $table->datetime('original_start')->nullable();
             $table->datetime('original_end')->nullable();
@@ -31,7 +30,7 @@ return new class extends BaseMigration
             $table->unsignedBigInteger('approved_by')->index();
             $table->text('approver_note')->nullable();
             $table->timestamp('approved_at')->nullable();
-            $table->foreign('approved_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('approved_by')->references('id')->on('users');
 
             $table->timestamp('finalized_at')->nullable();
 

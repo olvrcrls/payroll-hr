@@ -69,7 +69,19 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE','Asia/Manila'),
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Timezone Display
+    |--------------------------------------------------------------------------
+    |
+    | It is a good practice to save date time records into UTC format
+    | and then display them accordingly to the defined application timezone.
+    |
+    */
+
+    'timezone_display' => env('APP_TIMEZONE_DISPLAY', 'Asia/Manila'),
 
     /*
     |--------------------------------------------------------------------------

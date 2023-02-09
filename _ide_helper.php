@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.29.0.
+ * Generated for Laravel 9.43.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1577,6 +1577,30 @@
                         $instance->terminate($input, $status);
         }
                     /**
+         * Register a callback to be invoked when the command lifecyle duration exceeds a given amount of time.
+         *
+         * @param \DateTimeInterface|\Carbon\CarbonInterval|float|int $threshold
+         * @param callable $handler
+         * @return void 
+         * @static 
+         */ 
+        public static function whenCommandLifecycleIsLongerThan($threshold, $handler)
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
+                        /** @var \App\Console\Kernel $instance */
+                        $instance->whenCommandLifecycleIsLongerThan($threshold, $handler);
+        }
+                    /**
+         * When the command being handled started.
+         *
+         * @return \Illuminate\Support\Carbon|null 
+         * @static 
+         */ 
+        public static function commandStartedAt()
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
+                        /** @var \App\Console\Kernel $instance */
+                        return $instance->commandStartedAt();
+        }
+                    /**
          * Register a Closure based command with the application.
          *
          * @param string $signature
@@ -1661,6 +1685,17 @@
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
                         /** @var \App\Console\Kernel $instance */
                         $instance->bootstrap();
+        }
+                    /**
+         * Bootstrap the application without booting service providers.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function bootstrapWithoutBootingProviders()
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
+                        /** @var \App\Console\Kernel $instance */
+                        $instance->bootstrapWithoutBootingProviders();
         }
                     /**
          * Set the Artisan application instance.
@@ -1981,7 +2016,7 @@
          * Attempt to authenticate a user with credentials and additional callbacks.
          *
          * @param array $credentials
-         * @param array|callable $callbacks
+         * @param array|callable|null $callbacks
          * @param bool $remember
          * @return bool 
          * @static 
@@ -2228,6 +2263,17 @@
         {
                         /** @var \Illuminate\Auth\SessionGuard $instance */
                         return $instance->setRequest($request);
+        }
+                    /**
+         * Get the timebox instance used by the guard.
+         *
+         * @return \Illuminate\Support\Timebox 
+         * @static 
+         */ 
+        public static function getTimebox()
+        {
+                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        return $instance->getTimebox();
         }
                     /**
          * Determine if the current user is authenticated. If not, throw an exception.
@@ -2814,9 +2860,9 @@
             /**
      * 
      *
-     * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable|string  $callback, array $options = [])
+     * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable|string $callback, array $options = [])
      * @method static mixed auth(\Illuminate\Http\Request $request)
-     * @method static void resolveAuthenticatedUserUsing(Closure $callback)
+     * @method static void resolveAuthenticatedUserUsing(\Closure $callback)
      * @see \Illuminate\Contracts\Broadcasting\Factory
      */ 
         class Broadcast {
@@ -3183,6 +3229,18 @@
                         return $instance->map($map);
         }
                     /**
+         * Specify the jobs that should be dispatched instead of faked.
+         *
+         * @param array|string $jobsToDispatch
+         * @return void 
+         * @static 
+         */ 
+        public static function except($jobsToDispatch)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        $instance->except($jobsToDispatch);
+        }
+                    /**
          * Assert if a job was dispatched based on a truth-test callback.
          *
          * @param string|\Closure $command
@@ -3456,6 +3514,18 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
                         return $instance->hasDispatchedAfterResponse($command);
+        }
+                    /**
+         * Dispatch an empty job batch for testing.
+         *
+         * @param string $name
+         * @return \Illuminate\Bus\Batch 
+         * @static 
+         */ 
+        public static function dispatchFakeBatch($name = '')
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        return $instance->dispatchFakeBatch($name);
         }
                     /**
          * Record the fake pending batch dispatch.
@@ -4930,7 +5000,7 @@
                     /**
          * Return all of the created connections.
          *
-         * @return \Illuminate\Database\array<string, \Illuminate\Database\Connection>
+         * @return array<string, \Illuminate\Database\Connection> 
          * @static 
          */ 
         public static function getConnections()
@@ -6209,6 +6279,18 @@
         public static function flushMacros()
         {
                         \Illuminate\Events\Dispatcher::flushMacros();
+        }
+                    /**
+         * Specify the events that should be dispatched instead of faked.
+         *
+         * @param array|string $eventsToDispatch
+         * @return \Illuminate\Support\Testing\Fakes\EventFake 
+         * @static 
+         */ 
+        public static function except($eventsToDispatch)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\EventFake $instance */
+                        return $instance->except($eventsToDispatch);
         }
                     /**
          * Assert if an event has a listener attached to it.
@@ -8377,7 +8459,6 @@
      * @method static void alwaysReplyTo(string $address, string|null $name = null)
      * @method static void alwaysReturnPath(string $address)
      * @method static void alwaysTo(string $address, string|null $name = null)
-     * @method static \Illuminate\Mail\PendingMail cc($users)
      * @method static \Illuminate\Mail\SentMessage|null plain(string $view, array $data, $callback)
      * @method static \Illuminate\Mail\SentMessage|null html(string $html, $callback)
      * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, \Illuminate\Contracts\Mail\Mailable|string|array $view)
@@ -8664,6 +8745,18 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
                         return $instance->to($users);
+        }
+                    /**
+         * Begin the process of mailing a mailable class instance.
+         *
+         * @param mixed $users
+         * @return \Illuminate\Mail\PendingMail 
+         * @static 
+         */ 
+        public static function cc($users)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
+                        return $instance->cc($users);
         }
                     /**
          * Begin the process of mailing a mailable class instance.
@@ -9131,7 +9224,7 @@
      *
      * @method static mixed reset(array $credentials, \Closure $callback)
      * @method static string sendResetLink(array $credentials, \Closure $callback = null)
-     * @method static \Illuminate\Contracts\Auth\CanResetPassword getUser(array $credentials)
+     * @method static \Illuminate\Contracts\Auth\CanResetPassword|null getUser(array $credentials)
      * @method static string createToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
      * @method static void deleteToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
      * @method static bool tokenExists(\Illuminate\Contracts\Auth\CanResetPassword $user, string $token)
@@ -9362,6 +9455,18 @@
         {
                         /** @var \Illuminate\Queue\QueueManager $instance */
                         return $instance->setApplication($app);
+        }
+                    /**
+         * Specify the jobs that should be queued instead of faked.
+         *
+         * @param array|string $jobsToBeQueued
+         * @return \Illuminate\Support\Testing\Fakes\QueueFake 
+         * @static 
+         */ 
+        public static function except($jobsToBeQueued)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
+                        return $instance->except($jobsToBeQueued);
         }
                     /**
          * Assert if a job was pushed based on a truth-test callback.
@@ -10827,6 +10932,7 @@
                     /**
          * Gets the list of trusted proxies.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getTrustedProxies()
@@ -10858,6 +10964,7 @@
                     /**
          * Gets the list of trusted host patterns.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getTrustedHosts()
@@ -11272,6 +11379,7 @@
                     /**
          * Gets the mime types associated with the format.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getMimeTypes($format)
@@ -11291,7 +11399,7 @@
                     /**
          * Associates a format with mime types.
          *
-         * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
+         * @param string|string[] $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
          * @static 
          */ 
         public static function setFormat($format, $mimeTypes)
@@ -11327,14 +11435,26 @@
                         return $instance->setRequestFormat($format);
         }
                     /**
-         * Gets the format associated with the request.
+         * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
          *
+         * @deprecated since Symfony 6.2, use getContentTypeFormat() instead
          * @static 
          */ 
         public static function getContentType()
         {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->getContentType();
+        }
+                    /**
+         * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
+         *
+         * @see Request::$formats
+         * @static 
+         */ 
+        public static function getContentTypeFormat()
+        {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->getContentTypeFormat();
         }
                     /**
          * Sets the default locale.
@@ -11440,6 +11560,7 @@
          *
          * @param bool $asResource If true, a resource will be returned
          * @return string|resource 
+         * @psalm-return ($asResource is true ? resource : string)
          * @static 
          */ 
         public static function getContent($asResource = false)
@@ -11496,6 +11617,7 @@
                     /**
          * Gets a list of languages acceptable by the client browser ordered in the user browser preferences.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getLanguages()
@@ -11506,6 +11628,7 @@
                     /**
          * Gets a list of charsets acceptable by the client browser in preferable order.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getCharsets()
@@ -11516,6 +11639,7 @@
                     /**
          * Gets a list of encodings acceptable by the client browser in preferable order.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getEncodings()
@@ -11526,6 +11650,7 @@
                     /**
          * Gets a list of content types acceptable by the client browser in preferable order.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getAcceptableContentTypes()
@@ -11570,6 +11695,40 @@
         {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->isFromTrustedProxy();
+        }
+                    /**
+         * Filter the given array of rules into an array of rules that are included in precognitive headers.
+         *
+         * @param array $rules
+         * @return array 
+         * @static 
+         */ 
+        public static function filterPrecognitiveRules($rules)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->filterPrecognitiveRules($rules);
+        }
+                    /**
+         * Determine if the request is attempting to be precognitive.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isAttemptingPrecognition()
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->isAttemptingPrecognition();
+        }
+                    /**
+         * Determine if the request is precognitive.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isPrecognitive()
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->isPrecognitive();
         }
                     /**
          * Determine if the request is sending JSON.
@@ -11906,6 +12065,20 @@
                         return $instance->missing($key);
         }
                     /**
+         * Apply the callback if the request is missing the given input item key.
+         *
+         * @param string $key
+         * @param callable $callback
+         * @param callable|null $default
+         * @return $this|mixed 
+         * @static 
+         */ 
+        public static function whenMissing($key, $callback, $default = null)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->whenMissing($key, $callback, $default);
+        }
+                    /**
          * Get the keys for all of the input and files.
          *
          * @return array 
@@ -11983,12 +12156,39 @@
                         return $instance->boolean($key, $default);
         }
                     /**
+         * Retrieve input as an integer value.
+         *
+         * @param string $key
+         * @param int $default
+         * @return int 
+         * @static 
+         */ 
+        public static function integer($key, $default = 0)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->integer($key, $default);
+        }
+                    /**
+         * Retrieve input as a float value.
+         *
+         * @param string $key
+         * @param float $default
+         * @return float 
+         * @static 
+         */ 
+        public static function float($key, $default = 0.0)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->float($key, $default);
+        }
+                    /**
          * Retrieve input from the request as a Carbon instance.
          *
          * @param string $key
          * @param string|null $format
          * @param string|null $tz
          * @return \Illuminate\Support\Carbon|null 
+         * @throws \Carbon\Exceptions\InvalidFormatException
          * @static 
          */ 
         public static function date($key, $format = null, $tz = null)
@@ -11999,9 +12199,10 @@
                     /**
          * Retrieve input from the request as an enum.
          *
+         * @template TEnum
          * @param string $key
-         * @param string $enumClass
-         * @return mixed|null 
+         * @param \Illuminate\Http\class-string<TEnum> $enumClass
+         * @return \Illuminate\Http\TEnum|null 
          * @static 
          */ 
         public static function enum($key, $enumClass)
@@ -12534,6 +12735,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar scopeBindings()
      * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
      * @method static \Illuminate\Routing\RouteRegistrar withoutMiddleware(array|string $middleware)
+     * @method static \Illuminate\Routing\RouteRegistrar withoutScopedBindings()
      * @see \Illuminate\Routing\Router
      */ 
         class Route {
@@ -12752,17 +12954,71 @@
                         return $instance->apiResource($name, $controller, $options);
         }
                     /**
+         * Register an array of singleton resource controllers.
+         *
+         * @param array $singletons
+         * @param array $options
+         * @return void 
+         * @static 
+         */ 
+        public static function singletons($singletons, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        $instance->singletons($singletons, $options);
+        }
+                    /**
+         * Route a singleton resource to a controller.
+         *
+         * @param string $name
+         * @param string $controller
+         * @param array $options
+         * @return \Illuminate\Routing\PendingSingletonResourceRegistration 
+         * @static 
+         */ 
+        public static function singleton($name, $controller, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->singleton($name, $controller, $options);
+        }
+                    /**
+         * Register an array of API singleton resource controllers.
+         *
+         * @param array $singletons
+         * @param array $options
+         * @return void 
+         * @static 
+         */ 
+        public static function apiSingletons($singletons, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        $instance->apiSingletons($singletons, $options);
+        }
+                    /**
+         * Route an API singleton resource to a controller.
+         *
+         * @param string $name
+         * @param string $controller
+         * @param array $options
+         * @return \Illuminate\Routing\PendingSingletonResourceRegistration 
+         * @static 
+         */ 
+        public static function apiSingleton($name, $controller, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->apiSingleton($name, $controller, $options);
+        }
+                    /**
          * Create a route group with shared attributes.
          *
          * @param array $attributes
          * @param \Closure|array|string $routes
-         * @return void 
+         * @return \Illuminate\Routing\Router 
          * @static 
          */ 
         public static function group($attributes, $routes)
         {
                         /** @var \Illuminate\Routing\Router $instance */
-                        $instance->group($attributes, $routes);
+                        return $instance->group($attributes, $routes);
         }
                     /**
          * Merge the given array with the last group stack.
@@ -13031,6 +13287,19 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->pushMiddlewareToGroup($group, $middleware);
+        }
+                    /**
+         * Remove the given middleware from the specified group.
+         *
+         * @param string $group
+         * @param string $middleware
+         * @return \Illuminate\Routing\Router 
+         * @static 
+         */ 
+        public static function removeMiddlewareFromGroup($group, $middleware)
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->removeMiddlewareFromGroup($group, $middleware);
         }
                     /**
          * Flush the router's middleware groups.
@@ -13554,6 +13823,16 @@
         public static function morphUsingUuids()
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
                         \Illuminate\Database\Schema\MySqlBuilder::morphUsingUuids();
+        }
+                    /**
+         * Set the default morph key type for migrations to ULIDs.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function morphUsingUlids()
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        \Illuminate\Database\Schema\MySqlBuilder::morphUsingUlids();
         }
                     /**
          * Determine if the given table has a given column.
@@ -14403,6 +14682,18 @@
                         return $instance->getHandler();
         }
                     /**
+         * Set the underlying session handler implementation.
+         *
+         * @param \SessionHandlerInterface $handler
+         * @return void 
+         * @static 
+         */ 
+        public static function setHandler($handler)
+        {
+                        /** @var \Illuminate\Session\Store $instance */
+                        $instance->setHandler($handler);
+        }
+                    /**
          * Determine if the session handler needs a request.
          *
          * @return bool 
@@ -14527,6 +14818,18 @@
         {
                         /** @var \Illuminate\Filesystem\FilesystemManager $instance */
                         return $instance->createS3Driver($config);
+        }
+                    /**
+         * Create a scoped driver.
+         *
+         * @param array $config
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @static 
+         */ 
+        public static function createScopedDriver($config)
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemManager $instance */
+                        return $instance->createScopedDriver($config);
         }
                     /**
          * Set the given disk instance.
@@ -14920,6 +15223,18 @@
         {
                         /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->size($path);
+        }
+                    /**
+         * Get the checksum for a file.
+         *
+         * @return string|false 
+         * @throws UnableToProvideChecksum
+         * @static 
+         */ 
+        public static function checksum($path, $options = [])
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->checksum($path, $options);
         }
                     /**
          * Get the mime-type of a given file.
@@ -15673,6 +15988,18 @@
         {
                         /** @var \Illuminate\Routing\UrlGenerator $instance */
                         return $instance->setKeyResolver($keyResolver);
+        }
+                    /**
+         * Clone a new instance of the URL generator with a different encryption key resolver.
+         *
+         * @param callable $keyResolver
+         * @return \Illuminate\Routing\UrlGenerator 
+         * @static 
+         */ 
+        public static function withKeyResolver($keyResolver)
+        {
+                        /** @var \Illuminate\Routing\UrlGenerator $instance */
+                        return $instance->withKeyResolver($keyResolver);
         }
                     /**
          * Get the root controller namespace.
@@ -16516,6 +16843,65 @@
                         $instance->callCreator($view);
         }
                     /**
+         * Start injecting content into a fragment.
+         *
+         * @param string $fragment
+         * @return void 
+         * @static 
+         */ 
+        public static function startFragment($fragment)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        $instance->startFragment($fragment);
+        }
+                    /**
+         * Stop injecting content into a fragment.
+         *
+         * @return string 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function stopFragment()
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->stopFragment();
+        }
+                    /**
+         * Get the contents of a fragment.
+         *
+         * @param string $name
+         * @param string|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getFragment($name, $default = null)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->getFragment($name, $default);
+        }
+                    /**
+         * Get the entire array of rendered fragments.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getFragments()
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->getFragments();
+        }
+                    /**
+         * Flush all of the fragments.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushFragments()
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        $instance->flushFragments();
+        }
+                    /**
          * Start injecting content into a section.
          *
          * @param string $section
@@ -16822,6 +17208,17 @@
      */ 
         class Vite {
                     /**
+         * Get the preloaded assets.
+         *
+         * @var array
+         * @static 
+         */ 
+        public static function preloadedAssets()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->preloadedAssets();
+        }
+                    /**
          * Get the Content Security Policy nonce applied to all generated tags.
          *
          * @return string|null 
@@ -16867,6 +17264,18 @@
         {
                         /** @var \Illuminate\Foundation\Vite $instance */
                         return $instance->withEntryPoints($entryPoints);
+        }
+                    /**
+         * Set the filename for the manifest file.
+         *
+         * @param string $filename
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function useManifestFilename($filename)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useManifestFilename($filename);
         }
                     /**
          * Get the Vite "hot" file path.
@@ -16928,6 +17337,18 @@
                         return $instance->useStyleTagAttributes($attributes);
         }
                     /**
+         * Use the given callback to resolve attributes for preload tags.
+         *
+         * @param \Illuminate\Foundation\(callable(string,  string, ?array, ?array): array)|array  $attributes
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function usePreloadTagAttributes($attributes)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->usePreloadTagAttributes($attributes);
+        }
+                    /**
          * Generate React refresh runtime script.
          *
          * @return \Illuminate\Support\HtmlString|void 
@@ -16952,6 +17373,28 @@
                         return $instance->asset($asset, $buildDirectory);
         }
                     /**
+         * Get a unique hash representing the current manifest, or null if there is no manifest.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function manifestHash($buildDirectory = null)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->manifestHash($buildDirectory);
+        }
+                    /**
+         * Determine if the HMR server is running.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isRunningHot()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->isRunningHot();
+        }
+                    /**
          * Get the Vite tag content as a string of HTML.
          *
          * @return string 
@@ -16961,6 +17404,52 @@
         {
                         /** @var \Illuminate\Foundation\Vite $instance */
                         return $instance->toHtml();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Foundation\Vite::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Foundation\Vite::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Foundation\Vite::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Foundation\Vite::flushMacros();
         }
          
     }
@@ -16987,18 +17476,6 @@
      *
      */ 
         class Str {
-                    /**
-         * 
-         *
-         * @see \Filament\Support\SupportServiceProvider::packageBooted()
-         * @param string $html
-         * @return string 
-         * @static 
-         */ 
-        public static function sanitizeHtml($html)
-        {
-                        return \Illuminate\Support\Str::sanitizeHtml($html);
-        }
          
     }
             /**
@@ -17019,24 +17496,6 @@
         public static function debug()
         {
                         return \Illuminate\Support\Collection::debug();
-        }
-         
-    }
-            /**
-     * 
-     *
-     */ 
-        class Stringable {
-                    /**
-         * 
-         *
-         * @see \Filament\Support\SupportServiceProvider::packageBooted()
-         * @return \Illuminate\Support\Stringable 
-         * @static 
-         */ 
-        public static function sanitizeHtml()
-        {
-                        return \Illuminate\Support\Stringable::sanitizeHtml();
         }
          
     }
@@ -17912,6 +18371,501 @@
      
 }
 
+    namespace Nwidart\Modules\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Module {
+                    /**
+         * Add other module location.
+         *
+         * @param string $path
+         * @return \Nwidart\Modules\Laravel\LaravelFileRepository 
+         * @static 
+         */ 
+        public static function addLocation($path)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->addLocation($path);
+        }
+                    /**
+         * Get all additional paths.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getPaths()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getPaths();
+        }
+                    /**
+         * Get scanned modules paths.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getScanPaths()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getScanPaths();
+        }
+                    /**
+         * Get & scan all modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function scan()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->scan();
+        }
+                    /**
+         * Get all modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function all()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->all();
+        }
+                    /**
+         * Get cached modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCached()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getCached();
+        }
+                    /**
+         * Get all modules as collection instance.
+         *
+         * @return \Nwidart\Modules\Collection 
+         * @static 
+         */ 
+        public static function toCollection()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->toCollection();
+        }
+                    /**
+         * Get modules by status.
+         *
+         * @param $status
+         * @return array 
+         * @static 
+         */ 
+        public static function getByStatus($status)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getByStatus($status);
+        }
+                    /**
+         * Determine whether the given module exist.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->has($name);
+        }
+                    /**
+         * Get list of enabled modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function allEnabled()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->allEnabled();
+        }
+                    /**
+         * Get list of disabled modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function allDisabled()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->allDisabled();
+        }
+                    /**
+         * Get count from all modules.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function count()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->count();
+        }
+                    /**
+         * Get all ordered modules.
+         *
+         * @param string $direction
+         * @return array 
+         * @static 
+         */ 
+        public static function getOrdered($direction = 'asc')
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getOrdered($direction);
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function getPath()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getPath();
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function register()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->register();
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function boot()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->boot();
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function find($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->find($name);
+        }
+                    /**
+         * Find a specific module, if there return that, otherwise throw exception.
+         *
+         * @param $name
+         * @return \Module 
+         * @throws ModuleNotFoundException
+         * @static 
+         */ 
+        public static function findOrFail($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->findOrFail($name);
+        }
+                    /**
+         * Get all modules as laravel collection instance.
+         *
+         * @param $status
+         * @return \Nwidart\Modules\Collection 
+         * @static 
+         */ 
+        public static function collections($status = 1)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->collections($status);
+        }
+                    /**
+         * Get module path for a specific module.
+         *
+         * @param $module
+         * @return string 
+         * @static 
+         */ 
+        public static function getModulePath($module)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getModulePath($module);
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function assetPath($module)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->assetPath($module);
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function config($key, $default = null)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->config($key, $default);
+        }
+                    /**
+         * Get storage path for module used.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getUsedStoragePath()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getUsedStoragePath();
+        }
+                    /**
+         * Set module used for cli session.
+         *
+         * @param $name
+         * @throws ModuleNotFoundException
+         * @static 
+         */ 
+        public static function setUsed($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->setUsed($name);
+        }
+                    /**
+         * Forget the module used for cli session.
+         *
+         * @static 
+         */ 
+        public static function forgetUsed()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->forgetUsed();
+        }
+                    /**
+         * Get module used for cli session.
+         *
+         * @return string 
+         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
+         * @static 
+         */ 
+        public static function getUsedNow()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getUsedNow();
+        }
+                    /**
+         * Get laravel filesystem instance.
+         *
+         * @return \Nwidart\Modules\Filesystem 
+         * @static 
+         */ 
+        public static function getFiles()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getFiles();
+        }
+                    /**
+         * Get module assets path.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getAssetsPath()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getAssetsPath();
+        }
+                    /**
+         * Get asset url from a specific module.
+         *
+         * @param string $asset
+         * @return string 
+         * @throws InvalidAssetPath
+         * @static 
+         */ 
+        public static function asset($asset)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->asset($asset);
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function isEnabled($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->isEnabled($name);
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function isDisabled($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->isDisabled($name);
+        }
+                    /**
+         * Enabling a specific module.
+         *
+         * @param string $name
+         * @return void 
+         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
+         * @static 
+         */ 
+        public static function enable($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        $instance->enable($name);
+        }
+                    /**
+         * Disabling a specific module.
+         *
+         * @param string $name
+         * @return void 
+         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
+         * @static 
+         */ 
+        public static function disable($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        $instance->disable($name);
+        }
+                    /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function delete($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->delete($name);
+        }
+                    /**
+         * Update dependencies for the specified module.
+         *
+         * @param string $module
+         * @static 
+         */ 
+        public static function update($module)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->update($module);
+        }
+                    /**
+         * Install the specified module.
+         *
+         * @param string $name
+         * @param string $version
+         * @param string $type
+         * @param bool $subtree
+         * @return \Symfony\Component\Process\Process 
+         * @static 
+         */ 
+        public static function install($name, $version = 'dev-master', $type = 'composer', $subtree = false)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->install($name, $version, $type, $subtree);
+        }
+                    /**
+         * Get stub path.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getStubPath()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getStubPath();
+        }
+                    /**
+         * Set stub path.
+         *
+         * @param string $stubPath
+         * @return \Nwidart\Modules\Laravel\LaravelFileRepository 
+         * @static 
+         */ 
+        public static function setStubPath($stubPath)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->setStubPath($stubPath);
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        \Nwidart\Modules\Laravel\LaravelFileRepository::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        \Nwidart\Modules\Laravel\LaravelFileRepository::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        return \Nwidart\Modules\Laravel\LaravelFileRepository::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {            //Method inherited from \Nwidart\Modules\FileRepository         
+                        \Nwidart\Modules\Laravel\LaravelFileRepository::flushMacros();
+        }
+         
+    }
+     
+}
+
     namespace Opcodes\LogViewer\Facades { 
             /**
      * 
@@ -17932,13 +18886,23 @@
                     /**
          * 
          *
-         * @return \Illuminate\Support\Collection|\Opcodes\LogViewer\LogFile[] 
+         * @return \Opcodes\LogViewer\LogFileCollection|\Opcodes\LogViewer\LogFile[] 
          * @static 
          */ 
         public static function getFiles()
         {
                         /** @var \Opcodes\LogViewer\LogViewerService $instance */
                         return $instance->getFiles();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getFilesGroupedByFolder()
+        {
+                        /** @var \Opcodes\LogViewer\LogViewerService $instance */
+                        return $instance->getFilesGroupedByFolder();
         }
                     /**
          * Find the file with the given identifier or file name.
@@ -17951,6 +18915,16 @@
         {
                         /** @var \Opcodes\LogViewer\LogViewerService $instance */
                         return $instance->getFile($fileIdentifier);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getFolder($folderIdentifier)
+        {
+                        /** @var \Opcodes\LogViewer\LogViewerService $instance */
+                        return $instance->getFolder($folderIdentifier);
         }
                     /**
          * 
@@ -18001,6 +18975,16 @@
         {
                         /** @var \Opcodes\LogViewer\LogViewerService $instance */
                         return $instance->auth($callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function lazyScanChunkSize()
+        {
+                        /** @var \Opcodes\LogViewer\LogViewerService $instance */
+                        return $instance->lazyScanChunkSize();
         }
                     /**
          * Get the maximum number of bytes of the log that we should display.
@@ -18177,7 +19161,7 @@
                     /**
          * 
          *
-         * @return \Spatie\FlareClient\array<int, FlareMiddleware|class-string<FlareMiddleware>>
+         * @return array<int, FlareMiddleware|class-string<FlareMiddleware>> 
          * @static 
          */ 
         public static function getMiddleware()
@@ -18238,7 +19222,7 @@
                     /**
          * 
          *
-         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|\Spatie\FlareClient\array<FlareMiddleware>|\Spatie\FlareClient\class-string<FlareMiddleware> $middleware
+         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|array<FlareMiddleware>|\Spatie\FlareClient\class-string<FlareMiddleware> $middleware
          * @return \Spatie\FlareClient\Flare 
          * @static 
          */ 
@@ -18250,7 +19234,7 @@
                     /**
          * 
          *
-         * @return \Spatie\FlareClient\array<int,FlareMiddleware|\Spatie\FlareClient\class-string<FlareMiddleware>> 
+         * @return array<int,FlareMiddleware|class-string<FlareMiddleware>> 
          * @static 
          */ 
         public static function getMiddlewares()
@@ -18410,7 +19394,7 @@
          *
          * @param string $groupName
          * @param mixed $default
-         * @return \Spatie\FlareClient\array<int, mixed>
+         * @return array<int, mixed> 
          * @static 
          */ 
         public static function getGroup($groupName = 'context', $default = [])
@@ -18509,1107 +19493,6 @@
         public static function hasValidSignatureWhileIgnoring($ignoreQuery = [], $absolute = true)
         {
                         return \Illuminate\Http\Request::hasValidSignatureWhileIgnoring($ignoreQuery, $absolute);
-        }
-         
-    }
-     
-}
-
-    namespace Livewire\Testing { 
-            /**
-     * 
-     *
-     * @mixin \Illuminate\Testing\TestResponse
-     */ 
-        class TestableLivewire {
-                    /**
-         * 
-         *
-         * @see \Filament\Support\Testing\TestsActions::parseActionName()
-         * @param string $name
-         * @return string 
-         * @static 
-         */ 
-        public static function parseActionName($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::parseActionName($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::mountPageAction()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function mountPageAction($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::mountPageAction($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::setPageActionData()
-         * @param array $data
-         * @return static 
-         * @static 
-         */ 
-        public static function setPageActionData($data)
-        {
-                        return \Livewire\Testing\TestableLivewire::setPageActionData($data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionDataSet()
-         * @param array $data
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionDataSet($data)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionDataSet($data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::callPageAction()
-         * @param string $name
-         * @param array $data
-         * @param array $arguments
-         * @return static 
-         * @static 
-         */ 
-        public static function callPageAction($name, $data = [], $arguments = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::callPageAction($name, $data, $arguments);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::callMountedPageAction()
-         * @param array $arguments
-         * @return static 
-         * @static 
-         */ 
-        public static function callMountedPageAction($arguments = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::callMountedPageAction($arguments);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionExists()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionExists($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotExist()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionDoesNotExist($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotExist($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionVisible()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionVisible($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionVisible($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionHidden()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionHidden($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionHidden($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionEnabled()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionEnabled($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionEnabled($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionDisabled()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionDisabled($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionDisabled($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionHasIcon()
-         * @param string $name
-         * @param string $icon
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionHasIcon($name, $icon, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionHasIcon($name, $icon, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveIcon()
-         * @param string $name
-         * @param string $icon
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionDoesNotHaveIcon($name, $icon, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveIcon($name, $icon, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionHasLabel()
-         * @param string $name
-         * @param string $label
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionHasLabel($name, $label, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionHasLabel($name, $label, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveLabel()
-         * @param string $name
-         * @param string $label
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionDoesNotHaveLabel($name, $label, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveLabel($name, $label, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionHasColor()
-         * @param string $name
-         * @param string $color
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionHasColor($name, $color, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionHasColor($name, $color, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveColor()
-         * @param string $name
-         * @param string $color
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionDoesNotHaveColor($name, $color, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveColor($name, $color, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertPageActionHeld()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertPageActionHeld($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertPageActionHeld($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertHasPageActionErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasPageActionErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasPageActionErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPageActions::assertHasNoPageActionErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasNoPageActionErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasNoPageActionErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPages::fillForm()
-         * @param array $state
-         * @return static 
-         * @static 
-         */ 
-        public static function fillForm($state = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::fillForm($state);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPages::assertFormSet()
-         * @param array $state
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormSet($state)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormSet($state);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPages::assertHasFormErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasFormErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasFormErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Testing\TestsPages::assertHasNoFormErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasNoFormErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasNoFormErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Forms\Testing\TestsForms::assertFormExists()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormExists($name = 'form')
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldExists()
-         * @param string $fieldName
-         * @param string $formName
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormFieldExists($fieldName, $formName = 'form')
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormFieldExists($fieldName, $formName);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsDisabled()
-         * @param string $fieldName
-         * @param string $formName
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormFieldIsDisabled($fieldName, $formName = 'form')
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsDisabled($fieldName, $formName);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsEnabled()
-         * @param string $fieldName
-         * @param string $formName
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormFieldIsEnabled($fieldName, $formName = 'form')
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsEnabled($fieldName, $formName);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsHidden()
-         * @param string $fieldName
-         * @param string $formName
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormFieldIsHidden($fieldName, $formName = 'form')
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsHidden($fieldName, $formName);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsVisible()
-         * @param string $fieldName
-         * @param string $formName
-         * @return static 
-         * @static 
-         */ 
-        public static function assertFormFieldIsVisible($fieldName, $formName = 'form')
-        {
-                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsVisible($fieldName, $formName);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Notifications\Testing\TestsNotifications::assertNotified()
-         * @param \Filament\Notifications\Notification|string|null $notification
-         * @return static 
-         * @static 
-         */ 
-        public static function assertNotified($notification = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertNotified($notification);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::mountTableAction()
-         * @param string $name
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function mountTableAction($name, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::mountTableAction($name, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::setTableActionData()
-         * @param array $data
-         * @return static 
-         * @static 
-         */ 
-        public static function setTableActionData($data)
-        {
-                        return \Livewire\Testing\TestableLivewire::setTableActionData($data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDataSet()
-         * @param array $data
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionDataSet($data)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionDataSet($data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::callTableAction()
-         * @param string $name
-         * @param mixed $record
-         * @param array $data
-         * @param array $arguments
-         * @return static 
-         * @static 
-         */ 
-        public static function callTableAction($name, $record = null, $data = [], $arguments = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::callTableAction($name, $record, $data, $arguments);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::callMountedTableAction()
-         * @param array $arguments
-         * @return static 
-         * @static 
-         */ 
-        public static function callMountedTableAction($arguments = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::callMountedTableAction($arguments);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionExists()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionExists($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotExist()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionDoesNotExist($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotExist($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionVisible()
-         * @param string $name
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionVisible($name, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionVisible($name, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHidden()
-         * @param string $name
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionHidden($name, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionHidden($name, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionEnabled()
-         * @param string $name
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionEnabled($name, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionEnabled($name, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDisabled()
-         * @param string $name
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionDisabled($name, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionDisabled($name, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasIcon()
-         * @param string $name
-         * @param string $icon
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionHasIcon($name, $icon, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionHasIcon($name, $icon, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveIcon()
-         * @param string $name
-         * @param string $icon
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionDoesNotHaveIcon($name, $icon, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveIcon($name, $icon, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasLabel()
-         * @param string $name
-         * @param string $label
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionHasLabel($name, $label, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionHasLabel($name, $label, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveLabel()
-         * @param string $name
-         * @param string $label
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionDoesNotHaveLabel($name, $label, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveLabel($name, $label, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasColor()
-         * @param string $name
-         * @param string $color
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionHasColor($name, $color, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionHasColor($name, $color, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveColor()
-         * @param string $name
-         * @param string $color
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionDoesNotHaveColor($name, $color, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveColor($name, $color, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHeld()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableActionHeld($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableActionHeld($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertHasTableActionErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasTableActionErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasTableActionErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsActions::assertHasNoTableActionErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasNoTableActionErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasNoTableActionErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::mountTableBulkAction()
-         * @param string $name
-         * @param \Illuminate\Support\Collection|array $records
-         * @return static 
-         * @static 
-         */ 
-        public static function mountTableBulkAction($name, $records)
-        {
-                        return \Livewire\Testing\TestableLivewire::mountTableBulkAction($name, $records);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::setTableBulkActionData()
-         * @param array $data
-         * @return static 
-         * @static 
-         */ 
-        public static function setTableBulkActionData($data)
-        {
-                        return \Livewire\Testing\TestableLivewire::setTableBulkActionData($data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDataSet()
-         * @param array $data
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionDataSet($data)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDataSet($data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::callTableBulkAction()
-         * @param string $name
-         * @param \Illuminate\Support\Collection|array $records
-         * @param array $data
-         * @param array $arguments
-         * @return static 
-         * @static 
-         */ 
-        public static function callTableBulkAction($name, $records, $data = [], $arguments = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::callTableBulkAction($name, $records, $data, $arguments);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::callMountedTableBulkAction()
-         * @param array $arguments
-         * @return static 
-         * @static 
-         */ 
-        public static function callMountedTableBulkAction($arguments = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::callMountedTableBulkAction($arguments);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionExists()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionExists($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotExist()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionDoesNotExist($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotExist($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionVisible()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionVisible($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionVisible($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHidden()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionHidden($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHidden($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionEnabled()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionEnabled($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionEnabled($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDisabled()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionDisabled($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDisabled($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHasIcon()
-         * @param string $name
-         * @param string $icon
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionHasIcon($name, $icon, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHasIcon($name, $icon, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotHaveIcon()
-         * @param string $name
-         * @param string $icon
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionDoesNotHaveIcon($name, $icon, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotHaveIcon($name, $icon, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHasLabel()
-         * @param string $name
-         * @param string $label
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionHasLabel($name, $label, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHasLabel($name, $label, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotHaveLabel()
-         * @param string $name
-         * @param string $label
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionDoesNotHaveLabel($name, $label, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotHaveLabel($name, $label, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHasColor()
-         * @param string $name
-         * @param string $color
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionHasColor($name, $color, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHasColor($name, $color, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotHaveColor()
-         * @param string $name
-         * @param string $color
-         * @param mixed $record
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionDoesNotHaveColor($name, $color, $record = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotHaveColor($name, $color, $record);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHeld()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableBulkActionHeld($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHeld($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertHasTableBulkActionErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasTableBulkActionErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasTableBulkActionErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsBulkActions::assertHasNoTableBulkActionErrors()
-         * @param array $keys
-         * @return static 
-         * @static 
-         */ 
-        public static function assertHasNoTableBulkActionErrors($keys = [])
-        {
-                        return \Livewire\Testing\TestableLivewire::assertHasNoTableBulkActionErrors($keys);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsColumns::assertCanRenderTableColumn()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertCanRenderTableColumn($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertCanRenderTableColumn($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnExists()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableColumnExists($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableColumnExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnVisible()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableColumnVisible($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableColumnVisible($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnHidden()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableColumnHidden($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableColumnHidden($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsColumns::sortTable()
-         * @param string|null $name
-         * @param string|null $direction
-         * @return static 
-         * @static 
-         */ 
-        public static function sortTable($name = null, $direction = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::sortTable($name, $direction);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsColumns::searchTable()
-         * @param string|null $search
-         * @return static 
-         * @static 
-         */ 
-        public static function searchTable($search = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::searchTable($search);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsFilters::filterTable()
-         * @param string $name
-         * @param mixed $data
-         * @return static 
-         * @static 
-         */ 
-        public static function filterTable($name, $data = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::filterTable($name, $data);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsFilters::resetTableFilters()
-         * @return static 
-         * @static 
-         */ 
-        public static function resetTableFilters()
-        {
-                        return \Livewire\Testing\TestableLivewire::resetTableFilters();
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsFilters::removeTableFilter()
-         * @param string $filter
-         * @param string|null $field
-         * @return static 
-         * @static 
-         */ 
-        public static function removeTableFilter($filter, $field = null)
-        {
-                        return \Livewire\Testing\TestableLivewire::removeTableFilter($filter, $field);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsFilters::removeTableFilters()
-         * @return static 
-         * @static 
-         */ 
-        public static function removeTableFilters()
-        {
-                        return \Livewire\Testing\TestableLivewire::removeTableFilters();
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsFilters::assertTableFilterExists()
-         * @param string $name
-         * @return static 
-         * @static 
-         */ 
-        public static function assertTableFilterExists($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertTableFilterExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsRecords::assertCanSeeTableRecords()
-         * @param \Illuminate\Support\Collection|array $records
-         * @param bool $inOrder
-         * @return static 
-         * @static 
-         */ 
-        public static function assertCanSeeTableRecords($records, $inOrder = false)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertCanSeeTableRecords($records, $inOrder);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsRecords::assertCanNotSeeTableRecords()
-         * @param \Illuminate\Support\Collection|array $records
-         * @return static 
-         * @static 
-         */ 
-        public static function assertCanNotSeeTableRecords($records)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertCanNotSeeTableRecords($records);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsRecords::assertCountTableRecords()
-         * @param int $count
-         * @return static 
-         * @static 
-         */ 
-        public static function assertCountTableRecords($count)
-        {
-                        return \Livewire\Testing\TestableLivewire::assertCountTableRecords($count);
         }
          
     }
@@ -21446,7 +21329,7 @@ namespace  {
                 /**
              * Set the table which the query is targeting.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $table
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $table
              * @param string|null $as
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -22960,6 +22843,20 @@ namespace  {
             }
              
                 /**
+             * Get a single expression value from the first result of a query.
+             *
+             * @param string $expression
+             * @param array $bindings
+             * @return mixed 
+             * @static 
+             */ 
+            public static function rawValue($expression, $bindings = [])
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->rawValue($expression, $bindings);
+            }
+             
+                /**
              * Get the count of the total records for the paginator.
              *
              * @param array $columns
@@ -23519,6 +23416,7 @@ namespace  {
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Livewire extends \Livewire\Livewire {}
+            class Module extends \Nwidart\Modules\Facades\Module {}
             class LogViewer extends \Opcodes\LogViewer\Facades\LogViewer {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      

@@ -4,8 +4,7 @@ use App\Base\BaseMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends BaseMigration
-{
+return new class () extends BaseMigration {
     /**
      * Run the migrations.
      *
@@ -20,7 +19,7 @@ return new class extends BaseMigration
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }
