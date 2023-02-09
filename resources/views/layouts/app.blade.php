@@ -13,8 +13,8 @@
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @if (isset($customJs))
-            {{ $customJs }}
+        @if (isset($customJs) || isset($js))
+            {{ $customJs ?? $js }}
         @endif
     </head>
     <body class="font-sans antialiased">
