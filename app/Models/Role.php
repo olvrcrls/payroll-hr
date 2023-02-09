@@ -14,6 +14,13 @@ class Role extends BaseModel
     use HasTimezone;
     use SoftDeletes;
 
+    /**
+     * All of the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = ['users'];
+
     /** Constant Variables for Role definition. */
     public const SUPER_ADMIN = 'super_admin';
     public const ADMIN = 'admin';

@@ -32,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $touches = ['roles'];
+    protected $touches = [];
 
     /**
      * The attributes that should be hidden for serialization.
