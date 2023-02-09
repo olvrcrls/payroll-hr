@@ -32,6 +32,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $loggedUser = auth()->user();
+        $loggedUser->update(['last_login_at' => now()]);
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -43,6 +46,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $loggedUser = auth()->user();
+        $loggedUser->update(['last_logout_at' => now()]);
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
