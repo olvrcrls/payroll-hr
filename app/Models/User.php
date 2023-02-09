@@ -136,4 +136,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'restored_at' => now()
         ]);
     }
+
+    public function test()
+    {
+        
+    }
 }
