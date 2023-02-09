@@ -129,7 +129,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Override the restore function for SoftDeletes
      * @return void
      */
-    public function restore()
+    public function restore(): void
     {
         $this->softDeleteRestore();
         $this->update([
@@ -139,6 +139,5 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function test()
     {
-        
     }
 }
