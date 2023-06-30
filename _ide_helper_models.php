@@ -22,11 +22,11 @@ namespace App\Models{
  * @property string|null $restored_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
- * @method static \Illuminate\Database\Query\Builder|Role onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Role query()
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereDeletedAt($value)
@@ -36,8 +36,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereRestoredAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereRestoredBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|Role withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Role withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role withoutTrashed()
  */
 	class Role extends \Eloquent {}
 }
@@ -67,9 +67,10 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet approved()
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet newQuery()
- * @method static \Illuminate\Database\Query\Builder|Timesheet onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet query()
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereAnnotation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereApprovedAt($value)
@@ -91,8 +92,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Timesheet whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|Timesheet withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Timesheet withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Timesheet withoutTrashed()
  */
 	class Timesheet extends \Eloquent {}
 }
@@ -106,28 +107,30 @@ namespace App\Models{
  * @property string $last_name
  * @property string|null $middle_name
  * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $email_verified_at
  * @property string $password
+ * @property string|null $last_login_at
+ * @property string|null $last_logout_at
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int|null $deleted_by
  * @property int|null $restored_by
- * @property string|null $restored_at
+ * @property \Illuminate\Support\Carbon|null $restored_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read string $full_name
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Role> $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Timesheet[] $timesheets
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Timesheet> $timesheets
  * @property-read int|null $timesheets_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @method static \Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
@@ -136,6 +139,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLoginAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLogoutAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereMiddleName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
@@ -143,8 +148,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRestoredAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRestoredBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|User withTrashed()
- * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
  */
 	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
 }

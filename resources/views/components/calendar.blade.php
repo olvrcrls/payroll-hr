@@ -2,7 +2,7 @@
 <div id="{{ $id }}"></div>
 
 
-<script>
+<script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
         let calendarId = {!! json_encode($id) !!};
         var calendarEl = document.getElementById(calendarId);
@@ -10,8 +10,8 @@
             initialView: 'dayGridMonth',
             selectable: true,
             selectMirror: false,
-            dateClick: function (info) {
-                alert('Clicked on: ' + info.dateStr);
+            dateClick: function (context) {
+                alert('Clicked on: ' + context.dateStr);
             }
         });
         calendar.render();
